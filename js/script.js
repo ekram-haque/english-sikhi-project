@@ -50,14 +50,24 @@ const displayWord = (words) => {
   const wordsContainer = document.getElementById("wordsContainer");
   wordsContainer.innerText = "";
 
+  if(words.length == 0){
+  wordsContainer.innerHTML = `
+       <div class="hind-siliguri-regular text-center col-span-full space-y-3">
+       <img class='mx-auto' src="./assets/alert-error.png" alt="">
+            <p class="text-sm text-gray-400">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+            <h2 class="text-3xl font-bold ">নেক্সট Lesson এ যান</h2>
+        </div>
+  `;
+  }
+
   words.forEach((word) => {
     const wordDiv = document.createElement("div");
     wordDiv.innerHTML = `
                 <div class=" py-10 px-5 bg-gray-50 space-y-3 m-3 shadow-sm rounded-lg">
-            <h2 class="text-3xl font-bold">${word.word}</h2>
+            <h2 class="text-3xl font-bold">${word.word ? word.word : 'word no found'}</h2>
            <div>
             <p class="font-semibold">Meaning / Pronounciation</p>
-            <p class="font-semibold">"${word.meaning} / ${word.pronunciation}"</p>
+            <p class="font-semibold">"${word.meaning ? word.meaning : 'অর্থ পাওয়া যায়নি'} / ${word.pronunciation ? word.pronunciation : 'pronunciation not found'}"</p>
            </div>
             <div class="flex justify-between mt-3">
                 <button class="btn  bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
