@@ -97,7 +97,7 @@ const displayWord = (words) => {
             <p class="font-semibold">"${word.meaning ? word.meaning : "অর্থ পাওয়া যায়নি"} / ${word.pronunciation ? word.pronunciation : "pronunciation not found"}"</p>
            </div>
             <div class="flex justify-between mt-3">
-                <button class="btn  bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
+                <button onClick='loadWordDetail(${word.id})' class="btn  bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn  bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
@@ -106,4 +106,59 @@ const displayWord = (words) => {
     wordsContainer.append(wordDiv);
     manageSpinner(false);
   });
+};
+
+// word details object schema
+// {
+//   "status": true,
+//   "message": "successfully fetched a word details",
+//   "data": {
+//     "word": "Eager",
+//     "meaning": "আগ্রহী",
+//     "pronunciation": "ইগার",
+//     "level": 1,
+//     "sentence": "The kids were eager to open their gifts.",
+//     "points": 1,
+//     "partsOfSpeech": "adjective",
+//     "synonyms": [
+//       "enthusiastic",
+//       "excited",
+//       "keen"
+//     ],
+//     "id": 5
+//   }
+// }
+
+const loadWordDetail = async (id) => {
+  const url = ` https://openapi.programming-hero.com/api/word/${id}`;
+  const res = await fetch(url);
+  const details = await res.json();
+  displayWordDetails(details.data);
+};
+
+const displayWordDetails = (details) => {
+  const modalBoxContainer = document.getElementById("modalBox");
+  modalBoxContainer.innerHTML = `<div>
+            <h2 class='text-xl font-bold poppins-regular '>${details.word} ( <i class="fa-solid fa-microphone-lines"></i> :${details.pronunciation})</h2>
+           </div>
+           <div>
+            <p class='font-semibold poppins-regular '>Meaning</p>
+            <p class='font-semibold hind-siliguri-regular'>${details.meaning}</p>
+           </div>
+           <div>
+            <p class='font-semibold poppins-regular '>Example</p>
+            <p class='poppins-regular '>${details.sentence}</p>
+           </div>
+           <div>
+            <p class='font-semibold hind-siliguri-regular'>সমার্থক শব্দ গুলো</p>
+            <div>${createArrayOffSym(details.synonyms)}</div>
+           </div>
+           <button class='btn btn-primary mt-5'>Complete Learning</button>
+           `;
+  document.getElementById("my_modal_5").showModal();
+};
+
+const createArrayOffSym = (arr) => {
+  const htmlEl = arr.map((el) => `<span class="btn bg-[#EDF7FF]">${el}</span>`);
+  return htmlEl.join(" ");
 };

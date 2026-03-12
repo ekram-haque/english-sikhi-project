@@ -42,8 +42,76 @@
   </head>
 
   <body>
+    <div class="navbar bg-[#00bbff44] shadow-sm">
+      <div class="navbar-start">
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </div>
+          <ul
+            tabindex="-1"
+            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          >
+            <li>
+              <a class="btn btn-outline btn-primary"
+                ><i class="fa-solid fa-circle-question"></i> FAQ</a
+              >
+            </li>
+
+            <li>
+              <a class="btn btn-outline btn-primary"
+                ><i class="fa-solid fa-book-open"></i> LEARN</a
+              >
+            </li>
+            <li>
+              <a class="btn btn-outline btn-primary"
+                ><i class="fa-solid fa-arrow-right-from-bracket rotate-180"></i>
+                LOGOUT</a
+              >
+            </li>
+          </ul>
+        </div>
+        <a class="text-xl flex items-center gap-1 poppins-regular"
+          >English <span><img src="assets/logo.png" alt="" /></span> Sikhi</a
+        >
+      </div>
+      <div class="navbar-end hidden lg:flex">
+        <ul class="menu menu-horizontal px-3">
+          <li>
+            <a class="btn btn-outline btn-primary mr-3"
+              ><i class="fa-solid fa-circle-question"></i> FAQ</a
+            >
+          </li>
+
+          <li>
+            <a class="btn btn-outline btn-primary mr-3"
+              ><i class="fa-solid fa-book-open"></i> LEARN</a
+            >
+          </li>
+          <li>
+            <a class="btn btn-outline btn-primary mr-3"
+              ><i class="fa-solid fa-arrow-right-from-bracket rotate-180"></i>
+              LOGOUT</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
     <!-- navbar code here  -->
-    <nav>
+    <!-- <nav>
       <div class="navbar bg-[#00bbff44] shadow-sm">
         <div class="navbar-start md:ml-10">
           <a class="text-xl flex items-center gap-1 poppins-regular"
@@ -64,12 +132,16 @@
           >
         </div>
       </div>
-    </nav>
+    </nav> -->
 
     <!-- banner section code here  -->
-    <section class="flex items-center justify-between w-11/12 mx-auto">
+    <section
+      class="flex md:flex-row flex-col-reverse items-center justify-between w-11/12 mx-auto"
+    >
       <div class="">
-        <h1 class="text-4xl font-bold poppins-regular">
+        <h1
+          class="text-4xl font-bold poppins-regular text-center md:text-start"
+        >
           <span class="font-bold text-[#00BCFF]">English</span> is Easy!!
         </h1>
         <p class="hind-siliguri-regular my-5 text-[#18181b]">
@@ -99,21 +171,41 @@
       <h3 class="text-4xl font-bold poppins-regular">
         <span class="font-bold text-[#00BCFF]">Let's</span> Learn Vocabularies
       </h3>
-     
+
       <!-- display lessons dynamically  -->
-      <div id="lessons-container" class="flex gap-5 justify-center flex-wrap mt-5"></div>
-       <span id="spinner" class="loading loading-ring loading-xl mt-5 hidden"></span>
+      <div
+        id="lessons-container"
+        class="flex gap-5 justify-center flex-wrap mt-5"
+      ></div>
+      <span
+        id="spinner"
+        class="loading loading-ring loading-xl mt-5 hidden"
+      ></span>
     </section>
 
-    <section id="wordsContainer" class=" grid grid-cols-3 gap-5 text-center bg-gray-200 p-10 w-11/12 mx-auto mt-5 rounded-lg">
-        <div class="hind-siliguri-regular text-center col-span-full space-y-3"> 
-            <p class="text-sm text-gray-400">আপনি এখনো কোন Lesson Select করেন নি</p>
-            <h2 class="text-3xl font-bold ">একটি Lesson Select করুন।</h2>
+    <section
+      id="wordsContainer"
+      class="grid grid-cols-1 md:grid-cols-3 gap-5 text-center bg-gray-200 p-10 w-11/12 mx-auto mt-5 rounded-lg"
+    >
+      <div class="hind-siliguri-regular text-center col-span-full space-y-3">
+        <p class="text-sm text-gray-400">আপনি এখনো কোন Lesson Select করেন নি</p>
+        <h2 class="text-3xl font-bold">একটি Lesson Select করুন।</h2>
+      </div>
+    </section>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <div id="modalBox" class="space-y-4"></div>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
         </div>
-
-
-    </section>
-    
+      </div>
+    </dialog>
 
     <!-- FAQ section here  -->
     <section class="w-11/12 mx-auto text-center mt-[200px]">
@@ -179,9 +271,11 @@
     </section>
 
     <!-- footer section here  -->
-    <footer class="border-t border-[#ffebeb] mt-[200px] flex justify-between items-center p-15">
+    <footer
+      class="border-t border-[#ffebeb] mt-[200px] flex flex-col md:flex-row justify-between sm:space-y-4 md:items-center p-15"
+    >
       <div>
-        <h3 class="flex items-center poppins-regular">
+        <h3 class="flex items-center sm:text-center poppins-regular">
           English <span><img src="assets/logo.png" alt="" /></span> Sikhi
         </h3>
         <p class="hind-siliguri-regular">ইংরেজি শিখুন সহজে</p>
@@ -191,10 +285,10 @@
       </div>
       <div>
         <h4>Follow us on</h4>
-        <div class="text-center">
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-youtube"></i>
-            <i class="fa-brands fa-instagram"></i>
+        <div class="md:text-center">
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-youtube"></i>
+          <i class="fa-brands fa-instagram"></i>
         </div>
       </div>
     </footer>
