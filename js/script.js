@@ -162,3 +162,24 @@ const createArrayOffSym = (arr) => {
   const htmlEl = arr.map((el) => `<span class="btn bg-[#EDF7FF]">${el}</span>`);
   return htmlEl.join(" ");
 };
+
+document.getElementById("searchBtn").addEventListener("click", () => {
+  removeActiveBtn();
+  // console.log('search button clicked')
+  const searchValue = document
+    .getElementById("input-search")
+    .value.trim()
+    .toLowerCase();
+  // console.log(searchValue)
+  fetch("https://openapi.programming-hero.com/api/words/all")
+    .then((res) => res.json())
+    .then((data) => {
+      const allWords = data.data;
+      // console.log(allWords)
+      const filteredWord = allWords.filter((word) =>
+        word.word.toLowerCase().includes(searchValue),
+      );
+      displayWord(filteredWord);
+      document.getElementById("input-search").value = "";
+    });
+});
